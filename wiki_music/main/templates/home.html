@@ -1,0 +1,38 @@
+{% extends '_header.html' %}
+
+{% block title %} Home page — Wiki Music {% endblock %}
+
+{% block content %}
+<h1>Welcome!</h1>
+
+<h2>Groups</h2>
+<ul>
+    {% for group in groups %}
+    <li><a href="{% url 'group_detail' group.id %}">{{ group.name }} ({{ group.creation_date }})</a></li>
+    {% empty %}
+    <li>No groups available.</li>
+    {% endfor %}
+</ul>
+
+
+<h2>Albums</h2>
+<ul>
+    {% for album in albums %}
+    <li><a href="{% url 'album_detail' album.id %}">{{ album.name }} — {{ album.group.name }}</a></li>
+    {% endfor %}
+</ul>
+
+<h2>Songs</h2>
+<ul>
+    {% for song in songs %}
+    <li><a href="{% url 'song_detail' song.id %}">{{ song.name }} ({{ song.group.name }})</a></li>
+    {% endfor %}
+</ul>
+
+<h2>Members</h2>
+<ul>
+    {% for member in members %}
+    <li><a href="{% url 'member_detail' member.id %}">{{ member.name }} ({{ member.group.name }})</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

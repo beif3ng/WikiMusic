@@ -1,0 +1,22 @@
+{% extends '_header.html' %}
+
+{% block content %}
+<h1>{{ song.name }}</h1>
+
+{% if song.album %}
+<p><strong>Album:</strong> <a href="{% url 'album_detail' song.album.id %}">{{ song.album.name }}</a></p>
+{% endif %}
+
+{% if song.group %}
+<p><strong>Group:</strong> <a href="{% url 'group_detail' song.group.id %}">{{ song.group.name }}</a></p>
+{% endif %}
+<p><strong>Description:</strong> {{ song.description }}</p>
+<p><strong>Duration:</strong> {{ song.duration|stringformat:"s"|slice:"2:" }}</p>
+<p><strong>Lyrics:</strong> {{ song.lyrics }}</p>
+{% if song.audio_file %}
+<audio controls>
+    <source src="{{ song.audio_file.url }}" type="audio/mpeg">
+    Your browser does not support audio
+</audio>
+{% endif %}
+{% endblock %}

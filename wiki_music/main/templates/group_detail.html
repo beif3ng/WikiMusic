@@ -1,0 +1,25 @@
+{% extends '_header.html' %}
+{% block content %}
+<h1>{{ group.name }}</h1>
+<p>{{ group.description }}</p>
+<p><strong>Creation date:</strong> {{ group.creation_date }}</p>
+<img src="{{ group.image.url }}" alt="{{ group.name }}" width="300">
+
+<h2>Albums</h2>
+<ul>
+    {% for album in group.albums.all %}
+    <li><a href="{% url 'album_detail' album.id %}">{{ album.name }}</a></li>
+    {% empty %}
+    <li>Empty</li>
+    {% endfor %}
+</ul>
+
+<h2>Songs</h2>
+<ul>
+    {% for song in group.songs.all %}
+    <li><a href="{% url 'song_detail' song.id %}">{{ song.name }}</a></li>
+    {% empty %}
+    <li>Empty</li>
+    {% endfor %}
+</ul>
+{% endblock %}

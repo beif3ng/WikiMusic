@@ -1,0 +1,10 @@
+{% extends '_header.html' %}
+
+{% block content %}
+<h1>{{ member.name }}</h1>
+<img src="{{ member.photo.url }}" alt="{{ member.name }}" style="max-width: 200px;">
+<p><strong>Bio:</strong> {{ member.biography }}</p>
+<p><strong>Role:</strong> {{ member.role }}</p>
+<p><strong>Birthdate:</strong> {{ member.birth_date }}</p>
+<p><strong>Member of group:</strong> <a href="{% url 'group_detail' member.group.id %}">{{member.group}}</a></p>
+{% endblock %}

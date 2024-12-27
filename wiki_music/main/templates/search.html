@@ -1,0 +1,71 @@
+{% extends '_header.html' %}
+
+{% block content %}
+<style>
+    input {
+        background-color: #ffc2d1;
+        border: 2px solid #ffe5ec;
+        border-radius: 8px;
+        padding: 0 10px;
+    }
+
+    input::placeholder {
+        color: white;
+    }
+
+    button {
+        background-color: #ffc2d1;
+        border: 2px solid #ffe5ec;
+        border-radius: 8px;
+        padding: 0 10px;
+    }
+</style>
+
+<form method="get" action="{% url 'search' %}">
+  <input type="text" name="q" value="{{ query|default:'' }}" placeholder="Type..." class="form-control"/>
+  <button type="submit">Search</button>
+</form>
+
+
+{% if results.groups or results.albums or results.songs or results.members %}
+<h2>Results</h2>
+
+<h3>Groups</h3>
+<ul>
+  {% for group in results.groups %}
+  <li><a href="{{ group.url }}">{{ group.name }}</a></li>
+  {% empty %}
+  <p>Empty</p>
+  {% endfor %}
+</ul>
+
+<h3>Albums</h3>
+<ul>
+  {% for album in results.albums %}
+  <li><a href="{{ album.url }}">{{ album.name }}</a></li>
+  {% empty %}
+  <p>Empty</p>
+  {% endfor %}
+</ul>
+
+<h3>Songs</h3>
+<ul>
+  {% for song in results.songs %}
+  <li><a href="{{ song.url }}">{{ song.name }}</a></li>
+  {% empty %}
+  <p>Empty</p>
+  {% endfor %}
+</ul>
+
+<h3>Members</h3>
+<ul>
+  {% for member in results.members %}
+  <li><a href="{{ member.url }}">{{ member.name }}</a></li>
+  {% empty %}
+  <p>Empty</p>
+  {% endfor %}
+</ul>
+{% else %}
+<p>Nothing found</p>
+{% endif %}
+{% endblock %}

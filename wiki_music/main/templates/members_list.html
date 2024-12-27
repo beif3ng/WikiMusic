@@ -1,0 +1,12 @@
+{% extends '_header.html' %}
+
+{% block content %}
+<h1>All group members</h1>
+<ul class="list-group">
+    {% for member in members %}
+    <li class="list-group-item">
+        <a href="{% url 'member_detail' member.id %}">{{ member.name }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
